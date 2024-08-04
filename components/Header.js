@@ -4,8 +4,6 @@ import '@fontsource/poppins'
 
 import Link from 'next/link'
 
-import Sidebar from './Sidebar'
-
 export default function Header() {
     return (
         <AppBar position="relative" sx={{ backgroundColor: "#FFA500" }}>
@@ -15,7 +13,7 @@ export default function Header() {
                         PantryList
                     </Typography>
                 </Link>
-                <Sidebar />
+
             </Box>
         </AppBar>
     )
