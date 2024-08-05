@@ -32,7 +32,6 @@ export default function Refrigerator() {
         console.log(docSnap)
         if(docSnap.exists()){
             const { quantity } = docSnap.data()
-            console.log("hi")
             await setDoc(docRef, {quantity: quantity + 1})
         }
         else {
@@ -44,11 +43,26 @@ export default function Refrigerator() {
     const removeItem = async (item) => {
         const docRef = doc(collection(db, 'shelf'), item)
         const docSnap = await getDoc(docRef)
-        console.log(docSnap)
         if(docSnap.exists()){
             await deleteDoc(docRef)
             await getPantry();
         }
+    }
+
+    const removeOneItem = async (item) => {
+
+        const docRef = doc(collection(db, "shelf"), item)
+        const docSnap = await getDoc(docRef)
+        if(docSnap.exists()){
+            const {quantity} = docSnap.data()
+            if(quantity === 1){
+                await deleteDoc(docRef)
+            }
+            else {
+                await setDoc(docRef, {quantity: quantity -1})
+            }
+        }
+        await getPantry();
     }
 
     const handleAddOpen = () => {
@@ -129,7 +143,7 @@ export default function Refrigerator() {
                             +
                         </Button>
                         <Button sx={{backgroundColor: "#ff0000"}} onClick={() => {
-                            removeItem(item.id)
+                            removeOneItem(item.id)
                         }} >
                             -
                         </Button>
