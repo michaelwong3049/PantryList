@@ -33,7 +33,6 @@ export default function Freezer() {
 
         if(docSnap.exists()){
             const { quantity } = docSnap.data()
-            console.log("hi")
             await setDoc(docRef, {quantity: quantity + 1})
         }
         else {
@@ -43,10 +42,8 @@ export default function Freezer() {
     }
 
     const removeItem = async (item) => {
-        console.log('removing')
         const docRef = doc(collection(db, 'freezer'), item)
         const docSnap = await getDoc(docRef)
-        console.log(docSnap)
         if(docSnap.exists()){
             const {quantity} = docSnap.data()
             if(quantity === 1) {
@@ -132,6 +129,16 @@ export default function Freezer() {
                         <Typography sx={{ fontFamily: "Poppins", fontSize: "20px", mb: "10px" }}>
                             Quantity: {item.quantity}
                         </Typography>
+                        <Button sx={{backgroundColor: "#00ff00", marginRight: "5px"}} onClick={() => {
+                            addItem(item.id);
+                        }} >
+                            +
+                        </Button>
+                        <Button sx={{backgroundColor: "#ff0000"}} onClick={() => {
+                            removeItem(item.id)
+                        }} >
+                            -
+                        </Button>
                     </Card>
                 ))}
             </Box>
