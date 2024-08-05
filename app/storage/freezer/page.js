@@ -45,14 +45,7 @@ export default function Freezer() {
         const docRef = doc(collection(db, 'freezer'), item)
         const docSnap = await getDoc(docRef)
         if(docSnap.exists()){
-            const {quantity} = docSnap.data()
-            if(quantity === 1) {
-                await deleteDoc(docRef)
-            }
-            else{
-                await setDoc(docRef, {quantity: quantity - 1})
-            }
-            
+            await deleteDoc(docRef)
             await getPantry();
         }
     }

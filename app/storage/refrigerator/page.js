@@ -47,13 +47,7 @@ export default function Refrigerator() {
         console.log(docSnap)
         if(docSnap.exists()){
             const {quantity} = docSnap.data()
-            if(quantity === 1) {
-                await deleteDoc(docRef)
-            }
-            else{
-                await setDoc(docRef, {quantity: quantity - 1})
-            }
-            
+            await deleteDoc(docRef)
             await getPantry();
         }
     }
