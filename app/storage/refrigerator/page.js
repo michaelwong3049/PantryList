@@ -75,7 +75,7 @@ export default function Refrigerator() {
     }
 
     return (
-        <Box sx={{ backgroundColor: "#00FFEC", height: "100vh" }}>
+        <Box sx={{ backgroundColor: "#00B2FF", height: "100vh" }}>
             <Typography sx={{ display: "flex", justifyContent: "center", fontSize: "50px", fontWeight: "bold", fontFamily: "Poppins", textDecoration: "underline" }}>
                 Refrigerator Items:
             </Typography>
@@ -130,6 +130,16 @@ export default function Refrigerator() {
                         <Typography sx={{ fontFamily: "Poppins", fontSize: "20px", mb: "10px" }}>
                             Quantity: {item.quantity}
                         </Typography>
+                        <Button sx={{backgroundColor: "#00ff00", marginRight: "5px"}} onClick={() => {
+                            addItem(item.id);
+                        }} >
+                            +
+                        </Button>
+                        <Button sx={{backgroundColor: "#ff0000"}} onClick={() => {
+                            removeItem(item.id)
+                        }} >
+                            -
+                        </Button>
                     </Card>
                 ))}
             </Box>
